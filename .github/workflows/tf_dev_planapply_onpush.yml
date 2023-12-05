@@ -27,10 +27,17 @@ jobs:
 
       - uses: actions/checkout@v3
 
-      - name: Set git credential for private TF module access
-        run: |
-          git config --local --remove-section http."https://github.com/"
-          git config --global url."https://foo:${GH_REPO_ACCESS_PAT}@github.com/tandemdiabetes".insteadOf "https://github.com/tandemdiabetes"
+      # - name: Set git credential for private TF module access
+      #   run: |
+      #     git config --local --remove-section http."https://github.com/"
+      #     git config --global url."https://foo:${GH_REPO_ACCESS_PAT}@github.com/tandemdiabetes".insteadOf "https://github.com/tandemdiabetes"
+          # Log into Azure with OIDC integration if branch is main
+      - name: 'Az CLI login for Main branch' 
+        uses: azure/login@v1
+        with:
+            client-id: ${{ secrets.AZURE_CLIENT_ID }}
+            tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+            subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: 'Terraform init'
         id: init
@@ -72,10 +79,10 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
 
-      - name: Set git credential for private TF module access
-        run: |
-          git config --local --remove-section http."https://github.com/"
-          git config --global url."https://foo:${GH_REPO_ACCESS_PAT}@github.com/tandemdiabetes".insteadOf "https://github.com/tandemdiabetes"
+      # - name: Set git credential for private TF module access
+      #   run: |
+      #     git config --local --remove-section http."https://github.com/"
+      #     git config --global url."https://foo:${GH_REPO_ACCESS_PAT}@github.com/tandemdiabetes".insteadOf "https://github.com/tandemdiabetes"
 
       - name: Terraform init
         run: terraform init -upgrade -input=false
