@@ -6,7 +6,7 @@ on:
     branches:
       - dev
     paths:
-      - '.github/workflows/tf_dev_planapply_onpush_delv100.yml'
+      - '.github/workflows/tf_dev_planapply_onpush.yml'
 
   workflow_dispatch:
 
@@ -18,7 +18,7 @@ jobs:
       run:
         shell: bash
 
-    environment: dev_planapply
+    environment: dev_plan
       
     steps:
       - uses: actions/setup-node@v2
