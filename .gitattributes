@@ -9,7 +9,7 @@
 .gitignore      text
 *.md            text diff=markdown
 *.tfvars        text
-
+*.tfvars       merge=binary
 #
 # Exclude files from exporting
 #
