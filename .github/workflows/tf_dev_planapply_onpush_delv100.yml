@@ -3,7 +3,9 @@ name: Terraform Plan and Apply
 on:
   push:
     branches:
-      - feature_dev_103SetWorkflow
+      - dev
+      # - feature_dev_103SetWorkflow
+      - 'feature_dev/*'
 
   workflow_dispatch:
 
@@ -15,7 +17,7 @@ jobs:
     
     name: 'Terraform Plan and Apply'
 
-    environment: dev_planapply
+    # environment: dev_planapply
     env: 
       ARM_CLIENT_ID: ${{ secrets.AZURE_DEV_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_DEV_CLIENT_SECRET }}
