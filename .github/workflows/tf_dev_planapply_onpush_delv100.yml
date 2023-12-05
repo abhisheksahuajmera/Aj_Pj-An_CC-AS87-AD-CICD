@@ -18,6 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     
     name: 'Terraform Plan and Apply'
+
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_DEV_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_DEV_CLIENT_SECRET }}
