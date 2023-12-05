@@ -1,0 +1,102 @@
+# name: Terraform Plan and Apply
+
+# on:
+#   push:
+#     branches:
+#       - dev
+#       - 'feature_dev_*'
+#     paths:
+#       - '.github/workflows/tf_dev_planapply_onpush.yml'
+
+#   workflow_dispatch:
+
+# jobs:
+#   tf-plan:
+#     name: 'terraform: init,validate,plan'
+#     runs-on: ubuntu-latest
+#     defaults:
+#       run:
+#         shell: bash
+
+#     environment: dev_planapply
+      
+#     steps:
+#       - uses: actions/setup-node@v2
+#         with:
+#           node-version: '14'
+
+#       - uses: actions/checkout@v3
+
+#       # - name: Set git credential for private TF module access
+#       #   run: |
+#       #     git config --local --remove-section http."https://github.com/"
+#       #     git config --global url."https://foo:${GH_REPO_ACCESS_PAT}@github.com/tandemdiabetes".insteadOf "https://github.com/tandemdiabetes"
+#           # Log into Azure with OIDC integration if branch is main
+#       # - name: 'Az CLI login for Main branch' 
+#       #   uses: azure/login@v1
+#       #   with:
+#       #       client-id: ${{ secrets.AZURE_DEV_CLIENT_ID }}
+#       #       tenant-id: ${{ secrets.AZURE_DEV_TENANT_ID }}
+#       #       subscription-id: ${{ secrets.AZURE_DEV_SUBSCRIPTION_ID }}
+#       # - name: Install Terraform
+#       #   uses: hashicorp/setup-terraform@v2
+#       #   with:
+#       #     terraform_version: '1.1.0'
+
+#       - name: 'Terraform init'
+#         id: init
+#         run: terraform init -upgrade -input=false
+
+#       - name: 'Terraform validate'
+#         id: validate
+#         run: terraform validate
+
+#       - name: 'Terraform plan'
+#         id: plan
+#         run: terraform plan -detailed-exitcode -input=false
+#         continue-on-error: true
+
+#       - name: Check for "terraform plan" failure
+#         if: steps.tf-plan.outputs.exitcode == 1
+#         run: exit 1
+
+#     outputs:
+#       tf-plan-exit-code: ${{ steps.tf-plan.outputs.exitcode }}
+
+#   tf-apply:
+#     name: 'terraform: apply'
+#     runs-on: ubuntu-latest
+#     needs: tf-plan
+#     if: |
+#       needs.tf-plan.outputs.tf-plan-exit-code == 2
+#     environment: dev_planapply
+
+#     defaults:
+#       run:
+#         shell: bash
+
+#     steps:
+#       - uses: actions/setup-node@v2
+#         with:
+#           node-version: '14'
+
+#       - name: Checkout Repo
+#         uses: actions/checkout@v3
+
+#       # - name: Set git credential for private TF module access
+#       #   run: |
+#       #     git config --local --remove-section http."https://github.com/"
+#       #     git config --global url."https://foo:${GH_REPO_ACCESS_PAT}@github.com/tandemdiabetes".insteadOf "https://github.com/tandemdiabetes"
+
+#       - name: Terraform init
+#         run: terraform init -upgrade -input=false
+
+#       - name: Terraform validate
+#         run: terraform validate
+
+#       - name: Terraform format
+#         run: terraform fmt -check -recursive
+#         continue-on-error: true
+
+#       - name: Terraform apply
+#         run: terraform apply -auto-approve
