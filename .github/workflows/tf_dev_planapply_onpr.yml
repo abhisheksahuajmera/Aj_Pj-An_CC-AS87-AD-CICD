@@ -6,7 +6,7 @@ on:
     branches:
       - dev
     paths:
-      - '.github/workflows/tf_dev_planapply_onpush.yml'
+      - '.github/workflows/tf_dev_planapply_onpr.yml'
 
   workflow_dispatch:
 

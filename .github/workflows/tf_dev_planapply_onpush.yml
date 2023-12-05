@@ -6,7 +6,7 @@ on:
       - dev
       - 'feature_dev_*'
     paths:
-      - '.github/workflows/tf_dev_planapply_onpush_delv100.yml'
+      - '.github/workflows/tf_dev_planapply_onpush.yml'
 
   workflow_dispatch:
 
