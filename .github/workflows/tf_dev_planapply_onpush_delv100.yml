@@ -5,21 +5,21 @@ on:
     branches:
       - dev
       - 'feature_dev_*'
+    paths:
+      - '.github/workflows/tf_dev_planapply_onpush_delv100.yml'
 
   workflow_dispatch:
 
 jobs:
   tf-plan:
+    timeout-minutes: ${{ fromJSON(vars.JOB_TIMEOUT_MINUTES_SHORT) }}
+    name: 'terraform: init,validate,plan'
     runs-on: ubuntu-latest
-
-    environment: dev_planapply
-    
-    name: 'Terraform Plan and Apply'
-
     defaults:
       run:
         shell: bash
 
+    environment: dev_plan
     # env: 
     #   ARM_CLIENT_ID: ${{ secrets.AZURE_DEV_CLIENT_ID }}
     #   ARM_CLIENT_SECRET: ${{ secrets.AZURE_DEV_CLIENT_SECRET }}
@@ -48,7 +48,6 @@ jobs:
 
       - name: 'Terraform plan'
         id: plan
-        # run: terraform plan
         run: terraform plan -detailed-exitcode -input=false
         continue-on-error: true
 
@@ -56,6 +55,5 @@ jobs:
         if: steps.tf-plan.outputs.exitcode == 1
         run: exit 1
 
-      - name: 'Terraform apply'
-        id: apply
-        run: terraform apply -auto-approve
+    outputs:
+      tf-plan-exit-code: ${{ steps.tf-plan.outputs.exitcode }}
