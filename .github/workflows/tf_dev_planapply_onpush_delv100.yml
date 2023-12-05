@@ -5,7 +5,7 @@ on:
     branches:
       - dev
       # - feature_dev_103SetWorkflow
-      - 'feature_dev/*'
+      - 'feature/*'
 
   workflow_dispatch:
 
