@@ -1,3 +1,9 @@
+// bootstraping-resourcing-rg
+resource "azurerm_resource_group" "resource_grouptg" {
+  name     = local.resource_group_name
+  location = local.resource_group_location
+}
+
 // appusing-storing-saaccount
 # module "securing_saaccount" {
 #   source                  = "./modules/saaccount" // Add version after registry
@@ -24,9 +30,4 @@
 # }
 
 
-// bootstraping-resourcing-rg
-resource "azurerm_resource_group" "resource_grouptg" {
-  name     = local.resource_group_name
-  location = local.resource_group_location
-}
 
