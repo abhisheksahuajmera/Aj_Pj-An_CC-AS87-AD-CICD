@@ -18,7 +18,7 @@ permissions:
 env:
   WORKING_DIR: .
   TF_VER: 1.1.0
-  BACKEND_FILE: provider.tf
+  BACKEND_FILE: ./provider.tf
 
 jobs:
   tf-plan:
@@ -68,14 +68,10 @@ jobs:
       #   run: terraform init -upgrade -input=false
 
       - name: Run> terraform init
-        run: |
-          cd "${{ env.WORKING_DIR}}"
-          terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.TARGET_ENV }}/${{ env.BACKEND_FILE }}"
+        run: terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.TARGET_ENV }}/${{ env.BACKEND_FILE }}"
 
       - name: Run> terraform validate
-        run: |
-          cd "${{ env.WORKING_DIR}}"
-          terraform validate
+        run: terraform validate
 
       # - name: 'Terraform plan'
       #   id: plan
