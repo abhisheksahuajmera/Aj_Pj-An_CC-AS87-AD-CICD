@@ -12,7 +12,7 @@ on:
 jobs:
   run:
     runs-on: ubuntu-latest
-    environment: dev_plan
+    environment: qa_plan
     steps:
       - run: echo tf_Indev_1Onpush_001Doecho_1Bydevplan
 
