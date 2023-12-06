@@ -29,7 +29,7 @@ jobs:
         shell: bash
         working-directory: .
 
-    environment: qa_planapply
+    environment: qa_plan
 
     env:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_DEV_CLIENT_ID }}
@@ -60,8 +60,3 @@ jobs:
       - name: 'Terraform init'
         id: init
         run: terraform init -upgrade -input=false
-
-      - name: 'Terraform plan'
-        id: plan
-        run: terraform plan
-          
