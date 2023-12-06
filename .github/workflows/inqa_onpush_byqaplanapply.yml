@@ -9,8 +9,18 @@ on:
       - '.github/workflows/inqa_onpush_byqaplanapply.yml'
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+env:
+  WORKING_DIR: .
+  TF_VER: 1.1.0
+  BACKEND_FILE: provider.tf
+
 jobs:
-  run:
+  tf-plan:
     runs-on: ubuntu-latest
     environment: qa_plan
     steps:
