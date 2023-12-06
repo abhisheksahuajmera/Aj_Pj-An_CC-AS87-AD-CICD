@@ -25,7 +25,7 @@ jobs:
   tf-plan:
     name: 'terraform: init,validate,plan'
     
-    timeout-minutes: ${{env.JOB_TIMEOUT_MINUTES_LONG}}
+    timeout-minutes: '${{env.JOB_TIMEOUT_MINUTES_LONG}}'
 
     runs-on: ubuntu-latest
 
@@ -95,7 +95,7 @@ jobs:
   tf-apply:
     name: 'terraform: apply'
     
-    timeout-minutes: ${{env.JOB_TIMEOUT_MINUTES_LONG}}
+    timeout-minutes: '${{env.JOB_TIMEOUT_MINUTES_LONG}}'
 
     runs-on: ubuntu-latest
     needs: tf-plan
