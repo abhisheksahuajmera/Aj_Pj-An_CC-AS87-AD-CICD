@@ -63,22 +63,18 @@ jobs:
       - name: Azure CLI Command
         run: az account show
 
-      # - name: 'Terraform init'
-      #   id: init
-      #   run: terraform init -upgrade -input=false
+      - name: 'Terraform init'
+        id: init
+        run: terraform init -upgrade -input=false
 
-      - name: Run> terraform init
-        run: terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.BACKEND_FILE }}"
+      # - name: Run> terraform init
+      #   run: terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.BACKEND_FILE }}"
 
-      - name: Run> terraform validate
+      - name: Terraform validate
         run: terraform validate
 
-      # - name: 'Terraform plan'
-      #   id: plan
-      #   run: terraform plan
-
-      - name: Run> terraform plan
-        id: tf-plan
+      - name: 'Terraform plan'
+        id: plan
         run: terraform plan -detailed-exitcode -input=false
         continue-on-error: true
 
