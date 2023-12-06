@@ -21,8 +21,24 @@ env:
 
 jobs:
   tf-plan:
+    name: 'terraform: init,validate,plan'
+    
+    timeout-minutes: 5
+
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: .
+
     environment: qa_plan
+
+    env:
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_QA_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_QA_TENANT_ID }}
+      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_QA_CLIENT_SECRET }}
+
     steps:
       - run: echo inqa_onpush_byqaplanapply
 
