@@ -74,7 +74,7 @@ jobs:
       - name: Run> terraform init
         run: |
           cd "${{ env.WORKING_DIR}}"
-          terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.BACKEND_FILE }}"
+          terraform init -upgrade -input=false -reconfigure"
 
       - name: Run> terraform validate
         run: |
