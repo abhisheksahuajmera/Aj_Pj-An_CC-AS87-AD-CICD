@@ -38,6 +38,7 @@ jobs:
 
     steps:
       - run: echo tf_Indev_1Onpush_008Doecho_2Bydevplanapply
+  
       - run: echo ${{ secrets.AZURE_DEV_CLIENT_ID }}
 
       - uses: actions/checkout@v3
