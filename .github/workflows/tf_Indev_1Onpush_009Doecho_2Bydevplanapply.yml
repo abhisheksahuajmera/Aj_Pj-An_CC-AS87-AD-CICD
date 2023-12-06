@@ -69,6 +69,10 @@ jobs:
       - name: 'Terraform plan'
         id: plan
         run: terraform plan
+        env:
+            ARM_CLIENT_ID: ${{ secrets.AZURE_DEV_CLIENT_ID }}
+            ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_DEV_SUBSCRIPTION_ID }}
+            ARM_TENANT_ID: ${{ secrets.AZURE_DEV_TENANT_ID }}
           
     outputs:
       tf-plan-exit-code: ${{ steps.tf-plan.outputs.exitcode }}
