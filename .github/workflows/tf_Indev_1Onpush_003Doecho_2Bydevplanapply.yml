@@ -1,4 +1,4 @@
-name:  tf_Indev_1Onpush_001Doecho_2Bydevplanapply
+name:  tf_Indev_1Onpush_003Doecho_2Bydevplanapply
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - dev
       - 'feature_dev_*'
     paths:
-      - '.github/workflows/tf_Indev_1Onpush_001Doecho_2Bydevplanapply.yml'
+      - '.github/workflows/tf_Indev_1Onpush_003Doecho_2Bydevplanapply.yml'
   workflow_dispatch:
 
 permissions:
@@ -24,5 +24,5 @@ jobs:
     runs-on: ubuntu-latest
     environment: dev_planapply
     steps:
-      - run: echo tf_Indev_1Onpush_001Doecho_2Bydevplanapply
+      - run: echo tf_Indev_1Onpush_003Doecho_2Bydevplanapply
 
