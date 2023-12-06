@@ -9,6 +9,11 @@ on:
     paths:
       - '.github/workflows/tf_dev_planapply_onpush.yml'
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   tf-plan:
     timeout-minutes: ${{ fromJSON(1) }}
@@ -33,8 +38,7 @@ jobs:
     
       # Log into Azure with OIDC integration if branch is main
       - name: 'Az CLI login' 
-        # uses: azure/login@v1
-        run: az login
+        uses: azure/login@v1
         with:
             client-id: ${{ secrets.AZURE_DEV_CLIENT_ID }}
             tenant-id: ${{ secrets.AZURE_DEV_TENANT_ID }}
