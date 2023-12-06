@@ -32,14 +32,14 @@ jobs:
     environment: qa_plan
 
     env:
-      AZURE_CLIENT_ID: ${{ secrets.AZURE_DEV_CLIENT_ID }}
-      AZURE_TENANT_ID: ${{ secrets.AZURE_DEV_TENANT_ID }}
-      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_DEV_CLIENT_SECRET }}
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_QA_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_QA_TENANT_ID }}
+      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_QA_CLIENT_SECRET }}
 
     steps:
       - run: echo tf_Indev_1Onpush_008Doecho_2Bydevplanapply
   
-      - run: echo ${{ secrets.AZURE_DEV_CLIENT_ID }}
+      - run: echo ${{ secrets.AZURE_QA_CLIENT_ID }}
 
       - uses: actions/checkout@v3
 
@@ -60,3 +60,7 @@ jobs:
       - name: 'Terraform init'
         id: init
         run: terraform init -upgrade -input=false
+
+      - name: 'Terraform plan'
+        id: plan
+        run: terraform plan
