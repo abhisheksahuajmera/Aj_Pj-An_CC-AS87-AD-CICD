@@ -68,7 +68,7 @@ jobs:
       #   run: terraform init -upgrade -input=false
 
       - name: Run> terraform init
-        run: terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.TARGET_ENV }}/${{ env.BACKEND_FILE }}"
+        run: terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.BACKEND_FILE }}"
 
       - name: Run> terraform validate
         run: terraform validate
