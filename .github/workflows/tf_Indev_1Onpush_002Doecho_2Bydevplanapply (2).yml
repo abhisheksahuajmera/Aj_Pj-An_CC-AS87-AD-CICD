@@ -1,28 +1,28 @@
-name:  tf_Indev_1Onpush_001Doecho_2Bydevplanapply
+# name:  tf_Indev_1Onpush_001Doecho_2Bydevplanapply
 
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - dev
-      - 'feature_dev_*'
-    paths:
-      - '.github/workflows/tf_Indev_1Onpush_001Doecho_2Bydevplanapply.yml'
+# on:
+#   workflow_dispatch:
+#   push:
+#     branches:
+#       - dev
+#       - 'feature_dev_*'
+#     paths:
+#       - '.github/workflows/tf_Indev_1Onpush_001Doecho_2Bydevplanapply.yml'
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+# permissions:
+#   contents: read
+#   pages: write
+#   id-token: write
 
-env:
-  WORKING_DIR: .
-  TF_VER: 1.1.0
-  BACKEND_FILE: provider.tf
+# env:
+#   WORKING_DIR: .
+#   TF_VER: 1.1.0
+#   BACKEND_FILE: provider.tf
 
-jobs:
-  run:
-    runs-on: ubuntu-latest
-    environment: dev_planapply
-    steps:
-      - run: echo tf_Indev_1Onpush_001Doecho_2Bydevplanapply
+# jobs:
+#   run:
+#     runs-on: ubuntu-latest
+#     environment: dev_planapply
+#     steps:
+#       - run: echo tf_Indev_1Onpush_001Doecho_2Bydevplanapply
 
