@@ -1,22 +1,3 @@
-# terraform {
-#   required_providers {
-#     azurerm = {
-#       source  = "hashicorp/azurerm"
-#       version = ">= 3.7.0"
-#     }
-#   }
-
-#   # Update this block with the location of your terraform state file
-#   backend "azurerm" {
-#     resource_group_name  = "rg-terraform-github-actions-state"
-#     storage_account_name = "terraformgithubactions"
-#     container_name       = "tfstate"
-#     key                  = "terraform.tfstate"
-#     use_oidc             = true
-#   }
-# }
-
-
 terraform {
   required_providers {
     azurerm = {
@@ -26,9 +7,10 @@ terraform {
   }
 
   backend "azurerm" {
-    resource_group_name  = "StorageAccount-ResourceGroup"
-    storage_account_name = "abcd1234"
-    container_name       = "tfstate"
-    key                  = "dev.terraform.tfstate"
+    resource_group_name   = "Assetronai-dev-101-rg-108"
+    storage_account_name  = "sa110"
+    container_name        = "sacon100" Name for the blob container to store Terraform state
+    key                   = "state100.tfstate" Name of the state file within the container.
+    access_key            = "gM2VSx+n9bCQgm5GEhzMk2r4J8VpEib+3E9ORv+GaI0jATiOgyrK6ZIcaIEMwoy+40llPcFX9Pp/+AStSDJ+Cw=="
   }
 }
