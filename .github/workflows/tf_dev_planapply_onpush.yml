@@ -1,24 +1,23 @@
-name: Terraform Plan and Apply
+name: tf_dev_planapply_onpush
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
+  workflow_dispatch:
   push:
     branches:
       - dev
       - 'feature_dev_*'
+    paths:
+      - '.github/workflows/tf_dev_planapply_onpush.yml'
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  resourcegroups:
-    # The type of runner that the job will run on
+  tf-plan:
+    timeout-minutes: ${{ fromJSON(vars.JOB_TIMEOUT_MINUTES_SHORT) }}
+    name: 'terraform: init,validate,plan'
     runs-on: ubuntu-latest
-    # environment: dev_plan
-    name: 'Terraform Plan and Apply'
+    defaults:
+      run:
+        shell: bash
+
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_DEV_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_DEV_CLIENT_SECRET }}
@@ -39,6 +38,5 @@ jobs:
         id: plan
         run: terraform plan
           
-      - name: 'Terraform apply'
-        id: apply
-        run: terraform apply -auto-approve
+    outputs:
+      tf-plan-exit-code: ${{ steps.tf-plan.outputs.exitcode }}
