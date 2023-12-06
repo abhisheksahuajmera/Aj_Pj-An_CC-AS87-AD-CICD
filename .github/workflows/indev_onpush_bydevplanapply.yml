@@ -34,17 +34,17 @@ jobs:
         shell: bash
         working-directory: .
 
-    environment: qa_plan
+    environment: dev_plan
 
     env:
-      AZURE_CLIENT_ID: ${{ secrets.AZURE_QA_CLIENT_ID }}
-      AZURE_TENANT_ID: ${{ secrets.AZURE_QA_TENANT_ID }}
-      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_QA_CLIENT_SECRET }}
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_DEV_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_DEV_TENANT_ID }}
+      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_DEV_CLIENT_SECRET }}
 
     steps:
       - run: echo indev_onpush_bydevplanapply
   
-      - run: echo ${{ secrets.AZURE_QA_CLIENT_ID }}
+      - run: echo ${{ secrets.AZURE_DEV_CLIENT_ID }}
 
       - uses: actions/checkout@v3
 
@@ -107,17 +107,17 @@ jobs:
         shell: bash
         working-directory: .
 
-    environment: qa_planapply
+    environment: dev_planapply
 
     env:
-      AZURE_CLIENT_ID: ${{ secrets.AZURE_QA_CLIENT_ID }}
-      AZURE_TENANT_ID: ${{ secrets.AZURE_QA_TENANT_ID }}
-      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_QA_CLIENT_SECRET }}
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_DEV_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_DEV_TENANT_ID }}
+      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_DEV_CLIENT_SECRET }}
 
     steps:
       - run: echo tf_Indev_1Onpush_010Doecho_2Bydevplanapply
   
-      - run: echo ${{ secrets.AZURE_QA_CLIENT_ID }}
+      - run: echo ${{ secrets.AZURE_DEV_CLIENT_ID }}
 
       - uses: actions/checkout@v3
 
