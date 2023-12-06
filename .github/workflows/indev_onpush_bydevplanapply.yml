@@ -1,4 +1,4 @@
-name:  tf_Indev_1Onpush_011Doecho_2Bydevplanapply.yml
+name:  indev_onpush_bydevplanapply
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - dev
       - 'feature_dev_*'
     paths:
-      - '.github/workflows/tf_Indev_1Onpush_011Doecho_2Bydevplanapply.yml.yml'
+      - '.github/workflows/indev_onpush_bydevplanapply.yml'
 
   workflow_dispatch:
 
@@ -36,15 +36,37 @@ jobs:
 
     environment: qa_plan
 
+    env:
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_QA_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_QA_TENANT_ID }}
+      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_QA_CLIENT_SECRET }}
+
     steps:
-      - run: echo tf_Indev_1Onpush_011Doecho_2Bydevplanapply.yml
+      - run: echo indev_onpush_bydevplanapply
   
+      - run: echo ${{ secrets.AZURE_QA_CLIENT_ID }}
+
       - uses: actions/checkout@v3
+
+      - name: Install Azure cli
+        run: |
+          sudo apt-get install ca-certificates curl apt-transport-https lsb-release gnupg
+          curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null
+          AZ_REPO=$(lsb_release -cs)
+          echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | sudo tee /etc/apt/sources.list.d/azure-cli.list
+          sudo apt-get update
+          sudo apt-get install azure-cli
 
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: '${{ env.TF_VER }}'
+
+      - name: Azure Login
+        run: az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
+
+      - name: Azure CLI Command
+        run: az account show
 
       - name: Run> terraform init
         run: |
@@ -87,9 +109,16 @@ jobs:
 
     environment: qa_planapply
 
+    env:
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_QA_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_QA_TENANT_ID }}
+      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_QA_CLIENT_SECRET }}
+
     steps:
       - run: echo tf_Indev_1Onpush_010Doecho_2Bydevplanapply
   
+      - run: echo ${{ secrets.AZURE_QA_CLIENT_ID }}
+
       - uses: actions/checkout@v3
 
       - name: Install Azure cli
@@ -105,6 +134,12 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: '${{ env.TF_VER }}'
+
+      - name: Azure Login
+        run: az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
+
+      - name: Azure CLI Command
+        run: az account show
 
       - name: Run> terraform init
         run: |

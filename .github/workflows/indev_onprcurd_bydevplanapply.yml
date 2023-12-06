@@ -1,12 +1,12 @@
-name:  tf_Indev_1Onpush_010Doecho_2Bydevplanapply
+name:  indev_onprcurd_bydevplanapply
 
 on:
-  push:
+  pull_request:
+    types: [opened, synchronize, reopened]
     branches:
       - dev
-      - 'feature_dev_*'
     paths:
-      - '.github/workflows/tf_Indev_1Onpush_010Doecho_2Bydevplanapply.yml'
+      - '.github/workflows/indev_onprcurd_bydevplanapply.yml'
 
   workflow_dispatch:
 
@@ -34,17 +34,17 @@ jobs:
         shell: bash
         working-directory: .
 
-    environment: qa_plan
+    environment: qa_planapply
 
     env:
-      AZURE_CLIENT_ID: ${{ secrets.AZURE_QA_CLIENT_ID }}
-      AZURE_TENANT_ID: ${{ secrets.AZURE_QA_TENANT_ID }}
-      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_QA_CLIENT_SECRET }}
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_DEV_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_DEV_TENANT_ID }}
+      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_DEV_CLIENT_SECRET }}
 
     steps:
-      - run: echo tf_Indev_1Onpush_010Doecho_2Bydevplanapply
+      - run: echo indev_onprcurd_bydevplanapply
   
-      - run: echo ${{ secrets.AZURE_QA_CLIENT_ID }}
+      - run: echo ${{ secrets.AZURE_DEV_CLIENT_ID }}
 
       - uses: actions/checkout@v3
 
@@ -110,14 +110,14 @@ jobs:
     environment: qa_planapply
 
     env:
-      AZURE_CLIENT_ID: ${{ secrets.AZURE_QA_CLIENT_ID }}
-      AZURE_TENANT_ID: ${{ secrets.AZURE_QA_TENANT_ID }}
-      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_QA_CLIENT_SECRET }}
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_DEV_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_DEV_TENANT_ID }}
+      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_DEV_CLIENT_SECRET }}
 
     steps:
       - run: echo tf_Indev_1Onpush_010Doecho_2Bydevplanapply
   
-      - run: echo ${{ secrets.AZURE_QA_CLIENT_ID }}
+      - run: echo ${{ secrets.AZURE_DEV_CLIENT_ID }}
 
       - uses: actions/checkout@v3
 
