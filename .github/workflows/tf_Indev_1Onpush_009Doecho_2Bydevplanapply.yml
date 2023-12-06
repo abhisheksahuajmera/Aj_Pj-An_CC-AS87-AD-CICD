@@ -1,4 +1,4 @@
-name:  tf_Indev_1Onpush_009Doecho_2Bydevplanapply
+name:  tf_Indev_1Onpush_008Doecho_2Bydevplanapply
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - dev
       - 'feature_dev_*'
     paths:
-      - '.github/workflows/tf_Indev_1Onpush_009Doecho_2Bydevplanapply.yml'
+      - '.github/workflows/tf_Indev_1Onpush_008Doecho_2Bydevplanapply.yml'
 
   workflow_dispatch:
 
@@ -29,16 +29,17 @@ jobs:
         shell: bash
         working-directory: .
 
-    environment: dev_planapply
+    environment: qa_planapply
 
     env:
-      AZURE_CLIENT_ID: ${{ secrets.AZURE_DEV_CLIENT_ID }}
-      AZURE_TENANT_ID: ${{ secrets.AZURE_DEV_TENANT_ID }}
-      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_DEV_CLIENT_SECRET }}
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_QA_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_QA_TENANT_ID }}
+      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_QA_CLIENT_SECRET }}
 
     steps:
-      - run: echo tf_Indev_1Onpush_009Doecho_2Bydevplanapply
-      - run: echo ${{ secrets.AZURE_DEV_CLIENT_ID }}
+      - run: echo tf_Indev_1Onpush_008Doecho_2Bydevplanapply
+  
+      - run: echo ${{ secrets.AZURE_QA_CLIENT_ID }}
 
       - uses: actions/checkout@v3
 
@@ -62,17 +63,41 @@ jobs:
       - name: Azure CLI Command
         run: az account show
 
-      - name: 'Terraform init'
-        id: init
-        run: terraform init -upgrade -input=false
+      # - name: 'Terraform init'
+      #   id: init
+      #   run: terraform init -upgrade -input=false
 
-      - name: 'Terraform plan'
-        id: plan
-        run: terraform plan
-        env:
-            ARM_CLIENT_ID: ${{ secrets.AZURE_DEV_CLIENT_ID }}
-            ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_DEV_SUBSCRIPTION_ID }}
-            ARM_TENANT_ID: ${{ secrets.AZURE_DEV_TENANT_ID }}
-          
+      - name: Run> terraform init
+        run: |
+          cd "${{ env.WORKING_DIR}}"
+          terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.TARGET_ENV }}/${{ env.BACKEND_FILE }}"
+
+      - name: Run> terraform validate
+        run: |
+          cd "${{ env.WORKING_DIR}}"
+          terraform validate
+
+      # - name: 'Terraform plan'
+      #   id: plan
+      #   run: terraform plan
+
+      - name: Run> terraform plan
+        id: tf-plan
+        run: |
+          cd "${{ env.WORKING_DIR}}"
+          terraform plan -detailed-exitcode -input=false
+        continue-on-error: true
+
+      - name: Check for "terraform plan" failure
+        if: steps.tf-plan.outputs.exitcode == 1
+        run: exit 1
+
     outputs:
       tf-plan-exit-code: ${{ steps.tf-plan.outputs.exitcode }}
+
+
+
+
+
+
+
