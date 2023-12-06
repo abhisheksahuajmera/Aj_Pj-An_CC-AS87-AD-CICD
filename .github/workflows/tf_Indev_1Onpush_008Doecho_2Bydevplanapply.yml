@@ -29,7 +29,7 @@ jobs:
         shell: bash
         working-directory: .
 
-    environment: qa_plan
+    environment: qa_planapply
 
     env:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_QA_CLIENT_ID }}
