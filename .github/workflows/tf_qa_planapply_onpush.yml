@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - dev
+      - qa
       - 'feature_qa_*'
     paths:
       - '.github/workflows/tf_QA_planapply_onpush.yml'
