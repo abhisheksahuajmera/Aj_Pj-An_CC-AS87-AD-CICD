@@ -31,6 +31,11 @@ jobs:
 
     environment: dev_planapply
 
+    env:
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_DEV_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_DEV_TENANT_ID }}
+      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_DEV_CLIENT_SECRET }}
+
     steps:
       - run: echo tf_Indev_1Onpush_005Doecho_2Bydevplanapply
       - run: echo ${{ secrets.AZURE_DEV_CLIENT_ID }}
