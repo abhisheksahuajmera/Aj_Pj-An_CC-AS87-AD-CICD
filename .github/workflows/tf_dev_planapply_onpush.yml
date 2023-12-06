@@ -11,7 +11,7 @@ on:
 
 jobs:
   tf-plan:
-    timeout-minutes: ${{ fromJSON(1) }}
+    timeout-minutes: ${{ fromJSON(vars.JOB_TIMEOUT_MINUTES_SHORT) }}
     name: 'terraform: init,validate,plan'
     runs-on: ubuntu-latest
     defaults:
