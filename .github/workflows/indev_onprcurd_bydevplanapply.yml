@@ -34,7 +34,7 @@ jobs:
         shell: bash
         working-directory: .
 
-    environment: qa_planapply
+    environment: dev_planapply
 
     env:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_DEV_CLIENT_ID }}
@@ -107,7 +107,7 @@ jobs:
         shell: bash
         working-directory: .
 
-    environment: qa_planapply
+    environment: dev_planapply
 
     env:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_DEV_CLIENT_ID }}
