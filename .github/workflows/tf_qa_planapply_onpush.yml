@@ -1,4 +1,4 @@
-name: tf_QA_planapply_onpush
+name: tf_qa_planapply_onpush
 
 on:
   workflow_dispatch:
@@ -7,7 +7,7 @@ on:
       - qa
       - 'feature_qa_*'
     paths:
-      - '.github/workflows/tf_QA_planapply_onpush.yml'
+      - '.github/workflows/tf_qa_planapply_onpush.yml'
 
 jobs:
   tf-plan:
