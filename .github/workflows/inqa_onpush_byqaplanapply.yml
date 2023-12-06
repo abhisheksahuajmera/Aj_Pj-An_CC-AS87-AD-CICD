@@ -3,8 +3,8 @@ name:  inqa_onpush_byqaplanapply
 on:
   push:
     branches:
-      - dev
-      - 'feature_dev_*'
+      - qa
+      - 'feature_qa_*'
     paths:
       - '.github/workflows/tf_Indev_1Onpush_001Doecho_1Bydevplan.yml'
   workflow_dispatch:
