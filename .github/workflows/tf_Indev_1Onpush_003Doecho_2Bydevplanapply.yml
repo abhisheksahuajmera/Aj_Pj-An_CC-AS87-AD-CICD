@@ -20,9 +20,12 @@ env:
   BACKEND_FILE: provider.tf
 
 jobs:
-  run:
+  tf-plan:
+    name: 'terraform: init,validate,plan'
+    timeout-minutes: ${{ fromJSON(1) }}
     runs-on: ubuntu-latest
     environment: dev_planapply
+
     steps:
       - run: echo tf_Indev_1Onpush_001Doecho_2Bydevplanapply
 

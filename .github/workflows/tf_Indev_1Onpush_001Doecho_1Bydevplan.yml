@@ -1,18 +1,18 @@
-name: tf_Indev_1Onpush_001Doecho_1Bydevplan
+# name: tf_Indev_1Onpush_001Doecho_1Bydevplan
 
-on:
-  push:
-    branches:
-      - dev
-      - 'feature_dev_*'
-    paths:
-      - '.github/workflows/tf_Indev_1Onpush_001Doecho_1Bydevplan.yml'
-  workflow_dispatch:
+# on:
+#   push:
+#     branches:
+#       - dev
+#       - 'feature_dev_*'
+#     paths:
+#       - '.github/workflows/tf_Indev_1Onpush_001Doecho_1Bydevplan.yml'
+#   workflow_dispatch:
 
-jobs:
-  run:
-    runs-on: ubuntu-latest
-    environment: dev_plan
-    steps:
-      - run: echo tf_Indev_1Onpush_001Doecho_1Bydevplan
+# jobs:
+#   run:
+#     runs-on: ubuntu-latest
+#     environment: dev_plan
+#     steps:
+#       - run: echo tf_Indev_1Onpush_001Doecho_1Bydevplan
 

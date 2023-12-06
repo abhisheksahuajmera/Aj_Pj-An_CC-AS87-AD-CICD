@@ -1,4 +1,4 @@
-# name: tf_Indev_1Onpush_001Doecho_2Bydevplanapply
+# name:  tf_Indev_1Onpush_001Doecho_2Bydevplanapply
 
 # on:
 #   push:
@@ -8,6 +8,16 @@
 #     paths:
 #       - '.github/workflows/tf_Indev_1Onpush_001Doecho_2Bydevplanapply.yml'
 #   workflow_dispatch:
+
+# permissions:
+#   contents: read
+#   pages: write
+#   id-token: write
+
+# env:
+#   WORKING_DIR: .
+#   TF_VER: 1.1.0
+#   BACKEND_FILE: provider.tf
 
 # jobs:
 #   run:
