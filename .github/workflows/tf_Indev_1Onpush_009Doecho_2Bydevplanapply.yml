@@ -67,26 +67,14 @@ jobs:
         id: init
         run: terraform init -upgrade -input=false
 
-      # - name: Run> terraform init
-      #   run: terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.BACKEND_FILE }}"
-
-      - name: Terraform validate
-        run: terraform validate
+      - name: Run> terraform validate
+        run: |
+          cd "${{ env.WORKING_DIR}}"
+          terraform validate
 
       - name: 'Terraform plan'
         id: plan
-        run: terraform plan -detailed-exitcode -input=false
-        continue-on-error: true
-
-      - name: Check for "terraform plan" failure
-        if: steps.tf-plan.outputs.exitcode == 1
-        run: exit 1
-
-    outputs:
-      tf-plan-exit-code: ${{ steps.tf-plan.outputs.exitcode }}
-
-
-
+        run: terraform plan
 
 
 
