@@ -54,3 +54,22 @@ jobs:
           cd "${{ env.WORKING_DIR}}"
           terraform init -upgrade -input=false -reconfigure
 
+
+      - name: Run> terraform validate
+        run: |
+          cd "${{ env.WORKING_DIR}}"
+          terraform validate
+
+      - name: Run> terraform plan
+        id: tf-plan
+        run: |
+          cd "${{ env.WORKING_DIR}}"
+          terraform plan -detailed-exitcode -input=false
+        continue-on-error: true
+
+      - name: Check for "terraform plan" failure
+        if: steps.tf-plan.outputs.exitcode == 1
+        run: exit 1
+
+    outputs:
+      tf-plan-exit-code: ${{ steps.tf-plan.outputs.exitcode }}
