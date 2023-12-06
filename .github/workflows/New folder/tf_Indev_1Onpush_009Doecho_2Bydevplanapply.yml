@@ -63,14 +63,6 @@ jobs:
       - name: Azure CLI Command
         run: az account show
 
-      # - name: 'Terraform init'
-      #   id: init
-      #   run: terraform init -upgrade -input=false
-
-      # - name: 'Terraform plan'
-      #   id: plan
-      #   run: terraform plan
-
       - name: Run> terraform init
         run: |
           cd "${{ env.WORKING_DIR}}"
