@@ -15,11 +15,10 @@ terraform {
   # }
 
   backend "azurerm" {
-    resource_group_name   = local.state_resource_group_namelc
-    storage_account_name  = local.state_storage_account_namelc
-    container_name        = local.state_container_namelc
-    key                   = local.state_keylc
-    access_key            = local.state_access_keylc
+    resource_group_name   = var.STATE_DEV_RESOURCE_GROUP_NAME
+    storage_account_name  = var.STATE_DEV_STORAGE_ACCOUNT_NAME
+    container_name        = var.STATE_DEV_CONTAINER_NAME
+    key                   = var.STATE_DEV_KEY
   }
 }
 
