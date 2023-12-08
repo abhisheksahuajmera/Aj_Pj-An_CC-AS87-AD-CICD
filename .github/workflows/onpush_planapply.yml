@@ -44,6 +44,11 @@ jobs:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_DEV_CLIENT_ID }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_DEV_TENANT_ID }}
       AZURE_CLIENT_SECRET: ${{ secrets.AZURE_DEV_CLIENT_SECRET }}
+      state_resource_group_name: ${{ secrets.STATE_RESOURCE_GROUP_NAME }}
+      state_storage_account_name: ${{ secrets.STATE_STORAGE_ACCOUNT_NAME }}
+      state_container_name: ${{ secrets.STATE_CONTAINER_NAME }}
+      state_key: ${{ secrets.STATE_KEY }}
+      state_access_key: ${{ secrets.STATE_ACCESS_KEY }}
 
     steps:
       - run: echo onpush_planapply
