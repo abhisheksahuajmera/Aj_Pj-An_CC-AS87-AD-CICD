@@ -42,6 +42,3 @@ resource "azurerm_resource_group" "resource_grouptg" {
 #   resource_group_name     = local.resource_group_name
 #   location                = local.resource_group_location
 # }
-
-
-

@@ -19,6 +19,7 @@ permissions:
 
 env:
   WORKING_DIR: .
+  CONFIG_DIR: ./config
   TF_VER: 1.1.0
   JOB_TIMEOUT_MINUTES_LONG: 5
   BACKEND_FILE: ./config/backend.tfvars
@@ -77,7 +78,7 @@ jobs:
       - name: Run> terraform init
         run: |
           cd "${{ env.WORKING_DIR}}"
-          terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.BACKEND_FILE }}"
+          terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.CONFIG_DIR }}/${{ env.BACKEND_FILE }}"
 
       - name: Run> terraform validate
         run: |
@@ -153,7 +154,7 @@ jobs:
       - name: Run> terraform init
         run: |
           cd "${{ env.WORKING_DIR}}"
-          terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.BACKEND_FILE }}"
+          terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.CONFIG_DIR }}/${{ env.BACKEND_FILE }}"
 
       - name: Run> terraform validate
         run: |
@@ -224,7 +225,7 @@ jobs:
       - name: Run> terraform init
         run: |
           cd "${{ env.WORKING_DIR}}"
-          terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.BACKEND_FILE }}"
+          terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.CONFIG_DIR }}/${{ env.BACKEND_FILE }}"
 
       - name: Run> terraform validate
         run: |
@@ -300,7 +301,7 @@ jobs:
       - name: Run> terraform init
         run: |
           cd "${{ env.WORKING_DIR}}"
-          terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.BACKEND_FILE }}"
+          terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.CONFIG_DIR }}/${{ env.BACKEND_FILE }}"
 
       - name: Run> terraform validate
         run: |
@@ -371,7 +372,7 @@ jobs:
       - name: Run> terraform init
         run: |
           cd "${{ env.WORKING_DIR}}"
-          terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.BACKEND_FILE }}"
+          terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.CONFIG_DIR }}/${{ env.BACKEND_FILE }}"
 
       - name: Run> terraform validate
         run: |
@@ -447,7 +448,7 @@ jobs:
       - name: Run> terraform init
         run: |
           cd "${{ env.WORKING_DIR}}"
-          terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.BACKEND_FILE }}"
+          terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.CONFIG_DIR }}/${{ env.BACKEND_FILE }}"
 
       - name: Run> terraform validate
         run: |
