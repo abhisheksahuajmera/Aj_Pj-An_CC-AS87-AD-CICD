@@ -1,4 +1,4 @@
-name: tf_Indev_1Onpush_001Doecho_1Bydevplan
+name:  tf_Indev_1Onpush_001Doecho_1Bydevplan
 
 on:
   push:
@@ -9,10 +9,21 @@ on:
       - '.github/workflows/tf_Indev_1Onpush_001Doecho_1Bydevplan.yml'
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+env:
+  WORKING_DIR: .
+  TF_VER: 1.1.0
+  BACKEND_FILE: provider.tf
+
 jobs:
-  run:
+  tf-plan:
     runs-on: ubuntu-latest
+    environment: dev_planapply
     steps:
-      - run: echo tf_Indev_1Onpush_001Doecho_1Bydevplan
-      - run: |
-          echo "Secret: $STATE_DEV_RESOURCE_GROUP_NAME"
+      - run: echo tf_Indev_1Onpush_001Doecho_1Bydevplan      
+      -  run: |
+          echo "Git Branch: $GITHUB_REF"
