@@ -30,6 +30,7 @@ jobs:
   tf-plan-dev:
     name: 'tf-plan-dev: init,validate,plan'
     
+    timeout-minutes: 5
 
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/heads/feature_dev') || github.ref == 'refs/heads/dev'
@@ -50,9 +51,6 @@ jobs:
       STATE_CONTAINER_NAME: ${{ secrets.STATE_DEV_CONTAINER_NAME }}
       STATE_KEY: ${{ secrets.STATE_DEV_KEY }}
       STATE_ACCESS_KEY: ${{ secrets.STATE_DEV_ACCESS_KEY }}
-      JOB_TIMEOUT_MINUTES_LONG: ${{ secrets.JOB_TIMEOUT_MINUTES_LONG }}
-
-    timeout-minutes: ${{env.JOB_TIMEOUT_MINUTES_LONG}}
 
     steps:
       - run: echo onpush_planapply
@@ -79,10 +77,20 @@ jobs:
       - name: Azure CLI Command
         run: az account show
 
+      # - name: Run> terraform init
+      #   run: |
+      #     cd "${{ env.WORKING_DIR}}"
+      #     terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.CONFIG_DIR }}/${{ env.BACKEND_FILE }}"
+
       - name: Run> terraform init
         run: |
           cd "${{ env.WORKING_DIR}}"
-          terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.CONFIG_DIR }}/${{ env.BACKEND_FILE }}"
+          terraform init -upgrade -input=false -reconfigure\ 
+             -backend-config "state_resource_group_name=$STATE_DEV_RESOURCE_GROUP_NAME" \ 
+             -backend-config "state_storage_account_name=$STATE_DEV_STORAGE_ACCOUNT_NAME" \ 
+             -backend-config "state_container_name=$STATE_DEV_CONTAINER_NAME" \ 
+             -backend-config "state_key=$TSTATE_DEV_KEY"
+             -backend-config "state_access_key=$STATE_DEV_ACCESS_KEY"
 
       - name: Run> terraform validate
         run: |
@@ -106,7 +114,7 @@ jobs:
   tf-apply-dev:
     name: 'tf-plan-dev: apply'
     
-    timeout-minutes: ${{env.JOB_TIMEOUT_MINUTES_LONG}}
+    timeout-minutes: 5
 
     runs-on: ubuntu-latest
     needs: tf-plan-dev
@@ -179,7 +187,7 @@ jobs:
   tf-plan-qa:
     name: 'tf-plan-qa: init,validate,plan'
     
-    timeout-minutes: ${{env.JOB_TIMEOUT_MINUTES_LONG}}
+    timeout-minutes: 5
 
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/heads/feature_qa') || github.ref == 'refs/heads/qa'
@@ -253,7 +261,7 @@ jobs:
   tf-apply-qa:
     name: 'tf-plan-qa: apply'
     
-    timeout-minutes: ${{env.JOB_TIMEOUT_MINUTES_LONG}}
+    timeout-minutes: 5
 
     runs-on: ubuntu-latest
     needs: tf-plan-qa
@@ -326,7 +334,7 @@ jobs:
   tf-plan-prod:
     name: 'tf-plan-prod: init,validate,plan'
     
-    timeout-minutes: ${{env.JOB_TIMEOUT_MINUTES_LONG}}
+    timeout-minutes: 5
 
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/prod'
@@ -400,7 +408,7 @@ jobs:
   tf-apply-prod:
     name: 'tf-plan-prod: apply'
     
-    timeout-minutes: ${{env.JOB_TIMEOUT_MINUTES_LONG}}
+    timeout-minutes: 5
 
     runs-on: ubuntu-latest
     needs: tf-plan-prod
