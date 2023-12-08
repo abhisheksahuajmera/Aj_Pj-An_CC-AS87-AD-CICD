@@ -23,14 +23,14 @@ env:
   WORKING_DIR: .
   CONFIG_DIR: ./configs
   TF_VER: 1.1.0
-  JOB_TIMEOUT_MINUTES_LONG: 5
+  JOB_TIMEOUT_MINUTES_LONG: $JOB_TIMEOUT_MINUTES_LONG
   BACKEND_FILE: backend.tfvars
 
 jobs:
   tf-plan-dev:
     name: 'tf-plan-dev: init,validate,plan'
     
-    timeout-minutes: 5
+    timeout-minutes: '${{env.JOB_TIMEOUT_MINUTES_LONG}}'
 
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/heads/feature_dev') || github.ref == 'refs/heads/dev'
