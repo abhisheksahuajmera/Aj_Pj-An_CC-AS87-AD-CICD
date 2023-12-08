@@ -53,11 +53,6 @@ variable "state_access_key" {
   description = "(Required) Update to force a change."
 }
 
-variable "state_resource_group_name" {
-  type        = string
-  description = "(Required) Update to force a change."
-}
-
 variable "STATE_DEV_RESOURCE_GROUP_NAME" {
   type        = string
   description = "(Required) Update to force a change."
