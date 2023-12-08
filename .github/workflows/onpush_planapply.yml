@@ -27,18 +27,6 @@ env:
 
 jobs:
   tf-plan-dev:
-    name: 'tf-plan-dev: init,validate,plan'
-    
-    timeout-minutes: ${{JOB_TIMEOUT_MINUTES_LONG_HERE }}
-
-    runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/heads/feature_dev') || github.ref == 'refs/heads/dev'
-
-    defaults:
-      run:
-        shell: bash
-        working-directory: .
-
     environment: dev_plan
 
     env:
@@ -51,6 +39,19 @@ jobs:
       STATE_KEY: ${{ secrets.STATE_DEV_KEY }}
       STATE_ACCESS_KEY: ${{ secrets.STATE_DEV_ACCESS_KEY }}
       JOB_TIMEOUT_MINUTES_LONG: $JOB_TIMEOUT_MINUTES_LONG
+
+    name: 'tf-plan-dev: init,validate,plan'
+    
+    timeout-minutes: ${{JOB_TIMEOUT_MINUTES_LONG }}
+
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/heads/feature_dev') || github.ref == 'refs/heads/dev'
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: .
+
 
     steps:
       - run: echo onpush_planapply
