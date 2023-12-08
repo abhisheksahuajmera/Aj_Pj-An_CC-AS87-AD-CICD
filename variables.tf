@@ -88,4 +88,8 @@ locals {
   resource_group_location = "${var.resource_group_location}"
   resource_group_location_country_code = "${var.resource_group_location_country_code}"
   resource_group_data_residency_location = "${var.resource_group_data_residency_location}"
+  storage_account_name  = var.state_storage_account_name
+  container_name        = var.state_container_name
+  key                   = var.state_key
+  access_key            = var.state_access_key
 }
