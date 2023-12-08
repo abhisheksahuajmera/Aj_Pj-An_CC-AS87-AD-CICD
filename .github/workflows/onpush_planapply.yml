@@ -56,9 +56,6 @@ jobs:
 
     steps:
       - run: echo onpush_planapply
-      - run: echo "${{ secrets.AZURE_DEV_CLIENT_ID }}"
-      - run: echo ${{ secrets.AZURE_DEV_CLIENT_ID }}
-      - run: echo "$JOB_TIMEOUT_MINUTES_LONG"
       - run: echo $JOB_TIMEOUT_MINUTES_LONG
 
       - uses: actions/checkout@v3
