@@ -54,6 +54,8 @@ jobs:
 
     steps:
       - run: echo onpush_planapply
+      - run: echo "${{ secrets.AZURE_DEV_CLIENT_ID }}"
+      - run: echo "$STATE_DEV_ACCESS_KEY"
 
       - uses: actions/checkout@v3
 
@@ -77,20 +79,25 @@ jobs:
       - name: Azure CLI Command
         run: az account show
 
+      - name: Run> terraform init
+        run: |
+          cd "${{ env.WORKING_DIR}}"
+          terraform init -upgrade -input=false -reconfigure
+
       # - name: Run> terraform init
       #   run: |
       #     cd "${{ env.WORKING_DIR}}"
       #     terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.CONFIG_DIR }}/${{ env.BACKEND_FILE }}"
 
-      - name: Run> terraform init
-        run: |
-          cd "${{ env.WORKING_DIR}}"
-          terraform init -upgrade -input=false -reconfigure\ 
-             -backend-config "state_resource_group_name=$STATE_DEV_RESOURCE_GROUP_NAME" \ 
-             -backend-config "state_storage_account_name=$STATE_DEV_STORAGE_ACCOUNT_NAME" \ 
-             -backend-config "state_container_name=$STATE_DEV_CONTAINER_NAME" \ 
-             -backend-config "state_key=$TSTATE_DEV_KEY"
-             -backend-config "state_access_key=$STATE_DEV_ACCESS_KEY"
+      # - name: Run> terraform init
+      #   run: |
+      #     cd "${{ env.WORKING_DIR}}"
+      #     terraform init -upgrade -input=false -reconfigure\
+      #        -backend-config "state_resource_group_name=$STATE_DEV_RESOURCE_GROUP_NAME" \ 
+      #        -backend-config "state_storage_account_name=$STATE_DEV_STORAGE_ACCOUNT_NAME" \ 
+      #        -backend-config "state_container_name=$STATE_DEV_CONTAINER_NAME" \ 
+      #        -backend-config "state_key=$TSTATE_DEV_KEY"
+      #        -backend-config "state_access_key=$STATE_DEV_ACCESS_KEY"
 
       - name: Run> terraform validate
         run: |
