@@ -44,11 +44,11 @@ jobs:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_DEV_CLIENT_ID }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_DEV_TENANT_ID }}
       AZURE_CLIENT_SECRET: ${{ secrets.AZURE_DEV_CLIENT_SECRET }}
-      state_resource_group_name: ${{ secrets.STATE_RESOURCE_GROUP_NAME }}
-      state_storage_account_name: ${{ secrets.STATE_STORAGE_ACCOUNT_NAME }}
-      state_container_name: ${{ secrets.STATE_CONTAINER_NAME }}
-      state_key: ${{ secrets.STATE_KEY }}
-      state_access_key: ${{ secrets.STATE_ACCESS_KEY }}
+      STATE_RESOURCE_GROUP_NAME: ${{ secrets.STATE_DEV_RESOURCE_GROUP_NAME }}
+      STATE_STORAGE_ACCOUNT_NAME: ${{ secrets.STATE_DEV_STORAGE_ACCOUNT_NAME }}
+      STATE_CONTAINER_NAME: ${{ secrets.STATE_DEV_CONTAINER_NAME }}
+      STATE_KEY: ${{ secrets.STATE_DEV_KEY }}
+      STATE_ACCESS_KEY: ${{ secrets.STATE_DEV_ACCESS_KEY }}
 
     steps:
       - run: echo onpush_planapply
@@ -78,7 +78,7 @@ jobs:
       - name: Run> terraform init
         run: |
           cd "${{ env.WORKING_DIR}}"
-          terraform init -upgrade -input=false -reconfigure
+          terraform init -upgrade -input=false -reconfigure -backend-config="state_resource_group_name=${STATE_RESOURCE_GROUP_NAME} -backend-config="storage_account_name=${STATE_STORAGE_ACCOUNT_NAME} -backend-config="state_container_name=${STATE_CONTAINER_NAME} -backend-config="state_key=${STATE_KEY}"
 
       - name: Run> terraform validate
         run: |
