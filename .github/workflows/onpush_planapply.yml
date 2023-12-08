@@ -23,12 +23,13 @@ env:
   WORKING_DIR: .
   TF_VER: 1.1.0
   BACKEND_FILE: backend.tfvars
+  JOB_TIMEOUT_MINUTES_LONG_HERE: 5
 
 jobs:
   tf-plan-dev:
     name: 'tf-plan-dev: init,validate,plan'
     
-    timeout-minutes: '${{JOB_TIMEOUT_MINUTES_LONG }}'
+    timeout-minutes: ${{JOB_TIMEOUT_MINUTES_LONG_HERE }}
 
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/heads/feature_dev') || github.ref == 'refs/heads/dev'
@@ -54,7 +55,11 @@ jobs:
     steps:
       - run: echo onpush_planapply
       - run: echo "${{ secrets.AZURE_DEV_CLIENT_ID }}"
+      - run: echo ${{ secrets.AZURE_DEV_CLIENT_ID }}
       - run: echo "$STATE_DEV_ACCESS_KEY"
+      - run: echo $STATE_DEV_ACCESS_KEY
+      - run: echo "$JOB_TIMEOUT_MINUTES_LONG"
+      - run: echo $JOB_TIMEOUT_MINUTES_LONG
 
       - uses: actions/checkout@v3
 
