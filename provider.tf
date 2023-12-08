@@ -14,12 +14,18 @@ terraform {
   #   access_key            = "gM2VSx+n9bCQgm5GEhzMk2r4J8VpEib+3E9ORv+GaI0jATiOgyrK6ZIcaIEMwoy+40llPcFX9Pp/+AStSDJ+Cw=="
   # }
 
-  backend "azurerm" {
-    resource_group_name   = local.STATE_DEV_RESOURCE_GROUP_NAMElc
-    storage_account_name  = local.STATE_DEV_STORAGE_ACCOUNT_NAMElc
-    container_name        = local.STATE_DEV_CONTAINER_NAMElc
-    key                   = local.STATE_DEV_KEYlc
-  }
+  # backend "azurerm" {
+  #   resource_group_name   = local.STATE_DEV_RESOURCE_GROUP_NAMElc
+  #   storage_account_name  = local.STATE_DEV_STORAGE_ACCOUNT_NAMElc
+  #   container_name        = local.STATE_DEV_CONTAINER_NAMElc
+  #   key                   = local.STATE_DEV_KEYlc
+  # }
+    backend "azurerm" {
+    resource_group_name   = "assetronai-dev-100"
+    storage_account_name  = "sa712"
+    container_name        = "sacon101"
+    key                   = "state104.tfstate"
+  }  
 }
 
 provider "azurerm" {
