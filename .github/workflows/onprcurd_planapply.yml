@@ -21,6 +21,7 @@ env:
   WORKING_DIR: .
   TF_VER: 1.1.0
   JOB_TIMEOUT_MINUTES_LONG: 5
+  BACKEND_FILE: ./config/backend.tfvars
 
 jobs:
   tf-plan-dev:
@@ -42,6 +43,11 @@ jobs:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_DEV_CLIENT_ID }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_DEV_TENANT_ID }}
       AZURE_CLIENT_SECRET: ${{ secrets.AZURE_DEV_CLIENT_SECRET }}
+      STATE_RESOURCE_GROUP_NAME: ${{ secrets.STATE_DEV_RESOURCE_GROUP_NAME }}
+      STATE_STORAGE_ACCOUNT_NAME: ${{ secrets.STATE_DEV_STORAGE_ACCOUNT_NAME }}
+      STATE_CONTAINER_NAME: ${{ secrets.STATE_DEV_CONTAINER_NAME }}
+      STATE_KEY: ${{ secrets.STATE_DEV_KEY }}
+      STATE_ACCESS_KEY: ${{ secrets.STATE_DEV_ACCESS_KEY }}
 
     steps:
       - run: echo onprcurd_planapply
@@ -71,7 +77,7 @@ jobs:
       - name: Run> terraform init
         run: |
           cd "${{ env.WORKING_DIR}}"
-          terraform init -upgrade -input=false -reconfigure
+          terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.BACKEND_FILE }}"
 
       - name: Run> terraform validate
         run: |
@@ -113,6 +119,11 @@ jobs:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_DEV_CLIENT_ID }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_DEV_TENANT_ID }}
       AZURE_CLIENT_SECRET: ${{ secrets.AZURE_DEV_CLIENT_SECRET }}
+      STATE_RESOURCE_GROUP_NAME: ${{ secrets.STATE_DEV_RESOURCE_GROUP_NAME }}
+      STATE_STORAGE_ACCOUNT_NAME: ${{ secrets.STATE_DEV_STORAGE_ACCOUNT_NAME }}
+      STATE_CONTAINER_NAME: ${{ secrets.STATE_DEV_CONTAINER_NAME }}
+      STATE_KEY: ${{ secrets.STATE_DEV_KEY }}
+      STATE_ACCESS_KEY: ${{ secrets.STATE_DEV_ACCESS_KEY }}
 
     steps:
       - run: echo onprcurd_planapply
@@ -142,7 +153,7 @@ jobs:
       - name: Run> terraform init
         run: |
           cd "${{ env.WORKING_DIR}}"
-          terraform init -upgrade -input=false -reconfigure
+          terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.BACKEND_FILE }}"
 
       - name: Run> terraform validate
         run: |
@@ -179,6 +190,11 @@ jobs:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_QA_CLIENT_ID }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_QA_TENANT_ID }}
       AZURE_CLIENT_SECRET: ${{ secrets.AZURE_QA_CLIENT_SECRET }}
+      STATE_RESOURCE_GROUP_NAME: ${{ secrets.STATE_QA_RESOURCE_GROUP_NAME }}
+      STATE_STORAGE_ACCOUNT_NAME: ${{ secrets.STATE_QA_STORAGE_ACCOUNT_NAME }}
+      STATE_CONTAINER_NAME: ${{ secrets.STATE_QA_CONTAINER_NAME }}
+      STATE_KEY: ${{ secrets.STATE_QA_KEY }}
+      STATE_ACCESS_KEY: ${{ secrets.STATE_QA_ACCESS_KEY }}
 
     steps:
       - run: echo onprcurd_planapply
@@ -208,7 +224,7 @@ jobs:
       - name: Run> terraform init
         run: |
           cd "${{ env.WORKING_DIR}}"
-          terraform init -upgrade -input=false -reconfigure
+          terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.BACKEND_FILE }}"
 
       - name: Run> terraform validate
         run: |
@@ -250,6 +266,11 @@ jobs:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_QA_CLIENT_ID }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_QA_TENANT_ID }}
       AZURE_CLIENT_SECRET: ${{ secrets.AZURE_QA_CLIENT_SECRET }}
+      STATE_RESOURCE_GROUP_NAME: ${{ secrets.STATE_QA_RESOURCE_GROUP_NAME }}
+      STATE_STORAGE_ACCOUNT_NAME: ${{ secrets.STATE_QA_STORAGE_ACCOUNT_NAME }}
+      STATE_CONTAINER_NAME: ${{ secrets.STATE_QA_CONTAINER_NAME }}
+      STATE_KEY: ${{ secrets.STATE_QA_KEY }}
+      STATE_ACCESS_KEY: ${{ secrets.STATE_QA_ACCESS_KEY }}
 
     steps:
       - run: echo onprcurd_planapply
@@ -279,7 +300,7 @@ jobs:
       - name: Run> terraform init
         run: |
           cd "${{ env.WORKING_DIR}}"
-          terraform init -upgrade -input=false -reconfigure
+          terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.BACKEND_FILE }}"
 
       - name: Run> terraform validate
         run: |
@@ -316,6 +337,11 @@ jobs:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_PROD_CLIENT_ID }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_PROD_TENANT_ID }}
       AZURE_CLIENT_SECRET: ${{ secrets.AZURE_PROD_CLIENT_SECRET }}
+      STATE_RESOURCE_GROUP_NAME: ${{ secrets.STATE_PROD_RESOURCE_GROUP_NAME }}
+      STATE_STORAGE_ACCOUNT_NAME: ${{ secrets.STATE_PROD_STORAGE_ACCOUNT_NAME }}
+      STATE_CONTAINER_NAME: ${{ secrets.STATE_PROD_CONTAINER_NAME }}
+      STATE_KEY: ${{ secrets.STATE_PROD_KEY }}
+      STATE_ACCESS_KEY: ${{ secrets.STATE_PROD_ACCESS_KEY }}
 
     steps:
       - run: echo onprcurd_planapply
@@ -345,7 +371,7 @@ jobs:
       - name: Run> terraform init
         run: |
           cd "${{ env.WORKING_DIR}}"
-          terraform init -upgrade -input=false -reconfigure
+          terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.BACKEND_FILE }}"
 
       - name: Run> terraform validate
         run: |
@@ -387,7 +413,12 @@ jobs:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_PROD_CLIENT_ID }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_PROD_TENANT_ID }}
       AZURE_CLIENT_SECRET: ${{ secrets.AZURE_PROD_CLIENT_SECRET }}
-
+      STATE_RESOURCE_GROUP_NAME: ${{ secrets.STATE_PROD_RESOURCE_GROUP_NAME }}
+      STATE_STORAGE_ACCOUNT_NAME: ${{ secrets.STATE_PROD_STORAGE_ACCOUNT_NAME }}
+      STATE_CONTAINER_NAME: ${{ secrets.STATE_PROD_CONTAINER_NAME }}
+      STATE_KEY: ${{ secrets.STATE_PROD_KEY }}
+      STATE_ACCESS_KEY: ${{ secrets.STATE_PROD_ACCESS_KEY }}
+      
     steps:
       - run: echo onprcurd_planapply
   
@@ -416,7 +447,7 @@ jobs:
       - name: Run> terraform init
         run: |
           cd "${{ env.WORKING_DIR}}"
-          terraform init -upgrade -input=false -reconfigure
+          terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.BACKEND_FILE }}"
 
       - name: Run> terraform validate
         run: |
