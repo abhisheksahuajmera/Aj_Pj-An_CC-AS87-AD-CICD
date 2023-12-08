@@ -20,6 +20,7 @@ terraform {
   #   container_name        = local.STATE_DEV_CONTAINER_NAMElc
   #   key                   = local.STATE_DEV_KEYlc
   # }
+
     backend "azurerm" {
     resource_group_name   = "assetronai-dev-100"
     storage_account_name  = "sa712"
