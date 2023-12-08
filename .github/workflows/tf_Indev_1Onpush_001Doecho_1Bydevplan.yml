@@ -14,4 +14,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo tf_Indev_1Onpush_001Doecho_1Bydevplan
-
+      - run: |
+          echo "Secret: $STATE_DEV_RESOURCE_GROUP_NAME"
