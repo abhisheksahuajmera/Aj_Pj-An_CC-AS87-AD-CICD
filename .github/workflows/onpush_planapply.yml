@@ -21,9 +21,7 @@ permissions:
 
 env:
   WORKING_DIR: .
-  CONFIG_DIR: ./configs
   TF_VER: 1.1.0
-  JOB_TIMEOUT_MINUTES_LONG: $JOB_TIMEOUT_MINUTES_LONG
   BACKEND_FILE: backend.tfvars
 
 jobs:
@@ -51,6 +49,7 @@ jobs:
       STATE_CONTAINER_NAME: ${{ secrets.STATE_DEV_CONTAINER_NAME }}
       STATE_KEY: ${{ secrets.STATE_DEV_KEY }}
       STATE_ACCESS_KEY: ${{ secrets.STATE_DEV_ACCESS_KEY }}
+      JOB_TIMEOUT_MINUTES_LONG: $JOB_TIMEOUT_MINUTES_LONG
 
     steps:
       - run: echo onpush_planapply
