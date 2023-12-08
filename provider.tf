@@ -21,7 +21,6 @@ terraform {
     key                   = local.state_key
     access_key            = local.state_access_key
   }
-
 }
 
 provider "azurerm" {
