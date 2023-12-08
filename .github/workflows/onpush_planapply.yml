@@ -43,7 +43,7 @@ jobs:
     name: 'tf-plan-dev: init,validate,plan'
     
     # timeout-minutes: ${{env.JOB_TIMEOUT_MINUTES_LONG }}
-    timeout-minutes: ${{env.JOB_TIMEOUT_MINUTES_LONG_HERE}}
+    timeout-minutes: 5
 
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/heads/feature_dev') || github.ref == 'refs/heads/dev'
