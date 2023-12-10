@@ -73,11 +73,11 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: '${{ env.TF_VER }}'
-          backend-config: |
-              resource_group_name : ${{ secrets.STATE_DEV_RESOURCE_GROUP_NAME }}
-              storage_account_name: ${{ secrets.STATE_DEV_STORAGE_ACCOUNT_NAME }}
-              container_name: ${{ secrets.STATE_DEV_CONTAINER_NAME }}
-              key: ${{ secrets.STATE_DEV_KEY }}
+          # backend-config: |
+          #     resource_group_name : ${{ secrets.STATE_DEV_RESOURCE_GROUP_NAME }}
+          #     storage_account_name: ${{ secrets.STATE_DEV_STORAGE_ACCOUNT_NAME }}
+          #     container_name: ${{ secrets.STATE_DEV_CONTAINER_NAME }}
+          #     key: ${{ secrets.STATE_DEV_KEY }}
       
       - name: Azure Login
         run: az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
