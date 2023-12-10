@@ -22,6 +22,7 @@ jobs:
   terraform:
     name: 'Terraform Push'
     runs-on: ubuntu-latest
+    environment: dev_plan
 
     # Use the Bash shell
     defaults:
