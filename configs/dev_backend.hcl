@@ -1,5 +1,0 @@
-state_resource_group_name   = "Assetronai-dev-101-rg-108"
-state_storage_account_name  = "sa110"
-state_container_name        = "sacon100"
-state_key                   = "state103.tfstate"
-state_key                   = "state103.tfstate"
