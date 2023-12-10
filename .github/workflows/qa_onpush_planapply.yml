@@ -7,7 +7,7 @@ on:
       - 'feature_qa_*'
 
     paths:
-      - '.github/workflows/onpush_planapply.yml'
+      - '.github/workflows/qa_onpush_planapply.yml'
 
   workflow_dispatch: 
 

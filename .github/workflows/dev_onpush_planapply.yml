@@ -7,7 +7,7 @@ on:
       - 'feature_dev_*'
 
     paths:
-      - '.github/workflows/onpush_planapply.yml'
+      - '.github/workflows/dev_onpush_planapply.yml'
 
   workflow_dispatch: 
 
