@@ -89,6 +89,9 @@ jobs:
       - name: Azure CLI Command
         run: az account show
 
+      - name: Azure Account Set
+        run: az account set --subscription ${{ secrets.AZURE_DEV_SUBSCRIPTION_ID }}
+
       - name: Run> terraform init
         # run: |
         #   cd "${{ env.WORKING_DIR}}"
