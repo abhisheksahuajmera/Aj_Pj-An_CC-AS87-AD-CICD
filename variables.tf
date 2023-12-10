@@ -91,7 +91,7 @@ variable "resource_group_location_country_code" {
 variable "resource_group_data_residency_location" {
   type        = string
   description = "(Required) Update to force a change."
-  default     = ""
+  default     = "" 
 }
 
 locals {
