@@ -73,7 +73,7 @@ jobs:
         run: |
           cd "${{ env.WORKING_DIR}}"
           # terraform init -upgrade -input=false -reconfigure
-          terraform init -upgrade=true -backend-config=configs/dev.tfvars
+          terraform init -upgrade=true -backend-config=configs/dev_backend.tfvars
 
       - name: Run> terraform validate
         run: |
@@ -84,7 +84,7 @@ jobs:
         id: tf-plan
         run: |
           cd "${{ env.WORKING_DIR}}"
-          terraform plan -detailed-exitcode -input=false -var-file=./configs/dev_backend.tfvars
+          terraform plan -detailed-exitcode -input=false -var-file=./configs/dev.tfvars
         continue-on-error: true
 
       - name: Check for "terraform plan" failure
