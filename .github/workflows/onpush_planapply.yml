@@ -88,7 +88,7 @@ jobs:
       - name: Run> terraform init
         run: |
           cd "${{ env.WORKING_DIR}}"
-          terraform init -upgrade -input=false -reconfigure
+          terraform init -upgrade -input=false -reconfigure -backend-config=configs/dev_backend.hcl
 
       # - name: Run> terraform init
       #   run: |
@@ -124,7 +124,7 @@ jobs:
         id: tf-plan
         run: |
           cd "${{ env.WORKING_DIR}}"
-          terraform plan -detailed-exitcode -input=false
+          terraform plan -detailed-exitcode -input=false -var-file=configs/dev.tfvars
         continue-on-error: true
 
       - name: Check for "terraform plan" failure
