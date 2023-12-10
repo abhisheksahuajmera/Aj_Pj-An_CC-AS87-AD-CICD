@@ -59,4 +59,4 @@ jobs:
 
       - name: 'Terraform init'
         id: init
-        run: terraform init -upgrade=true -input=false -backend-config=configs/dev_backend.hcl
+        run: terraform init 
