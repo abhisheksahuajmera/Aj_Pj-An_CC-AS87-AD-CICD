@@ -1,0 +1,61 @@
+name:  tf_Indev_1Onpush_008Doecho_2Bydevplanapply
+
+on:
+  push:
+    branches:
+      - dev
+      - 'feature_dev_*'
+    paths:
+      - '.github/workflows/tf_Indev_1Onpush_008Doecho_2Bydevplanapply.yml'
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+env:
+  WORKING_DIR: .
+  TF_VER: 1.1.0
+  BACKEND_FILE: provider.tf
+
+jobs:
+  tf-plan:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: .
+
+    environment: dev_planapply
+
+    env:
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_DEV_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_DEV_TENANT_ID }}
+      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_DEV_CLIENT_SECRET }}
+
+    steps:
+      - run: echo tf_Indev_1Onpush_008Doecho_2Bydevplanapply
+      - run: echo ${{ secrets.AZURE_DEV_CLIENT_ID }}
+
+      - uses: actions/checkout@v3
+
+      - name: Install Azure cli
+        run: |
+          sudo apt-get install ca-certificates curl apt-transport-https lsb-release gnupg
+          curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null
+          AZ_REPO=$(lsb_release -cs)
+          echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | sudo tee /etc/apt/sources.list.d/azure-cli.list
+          sudo apt-get update
+          sudo apt-get install azure-cli
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: '${{ env.TF_VER }}'
+
+      - name: 'Terraform init'
+        id: init
+        run: terraform init -upgrade=true -input=false -backend-config=configs/dev_backend.hcl
