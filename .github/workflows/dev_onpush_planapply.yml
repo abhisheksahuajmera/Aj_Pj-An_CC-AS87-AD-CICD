@@ -91,12 +91,6 @@ jobs:
         # run: |
         #   cd "${{ env.WORKING_DIR}}"
         #   terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.BACKEND_DIR }}/${{ env.BACKEND_FILE }}"
-        env:
-            RESOURCE_GROUP_NAME: ${{ secrets.STATE_DEV_RESOURCE_GROUP_NAME }}
-            STORAGE_ACCOUNT_NAME: ${{ secrets.STATE_DEV_STORAGE_ACCOUNT_NAME }}
-            CONTAINER_NAME: ${{ secrets.STATE_DEV_CONTAINER_NAME }}
-            STATE_KEY: ${{ secrets.STATE_DEV_KEY }}
-
         run: terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP_NAME"
 
       - name: Run> terraform validate
@@ -127,7 +121,6 @@ jobs:
     needs: tf-plan-dev
     if: |
       needs.tf-plan-dev.outputs.tf-plan-exit-code == 2
-      # && (startsWith(github.ref, 'refs/heads/feature_dev') || github.ref == 'refs/heads/dev')
 
     defaults:
       run:
