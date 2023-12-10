@@ -77,7 +77,8 @@ jobs:
         run: |
           cd "${{ env.WORKING_DIR}}"
           # terraform init -upgrade -input=false -reconfigure
-          terraform init -upgrade=true -backend-config=configs/dev_backend.tfvars
+          # terraform init -upgrade=true -backend-config=configs/dev_backend.tfvars
+          terraform init -upgrade=true -var-file=./configs/dev.tfvars
 
       - name: Run> terraform validate
         run: |
