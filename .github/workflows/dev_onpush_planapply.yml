@@ -91,7 +91,8 @@ jobs:
         # run: |
         #   cd "${{ env.WORKING_DIR}}"
         #   terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.BACKEND_DIR }}/${{ env.BACKEND_FILE }}"
-        run: terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP_NAME"
+
+        run: terraform init -backend-config="storage_account_name=$STATE_STORAGE_ACCOUNT" -backend-config="container_name=$STATE_CONTAINER_NAME" -backend-config="resource_group_name=$STATE_RESOURCE_GROUP_NAME"  -backend-config="key=$STATE_KEY"
 
       - name: Run> terraform validate
         run: |
