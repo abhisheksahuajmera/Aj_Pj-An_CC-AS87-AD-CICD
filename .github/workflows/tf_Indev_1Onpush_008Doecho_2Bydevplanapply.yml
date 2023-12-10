@@ -83,7 +83,7 @@ jobs:
         id: tf-plan
         run: |
           cd "${{ env.WORKING_DIR}}"
-          terraform plan -detailed-exitcode -input=false
+          terraform plan -detailed-exitcode -input=false -var-file=configs/dev.tfvars
         continue-on-error: true
 
       - name: Check for "terraform plan" failure
