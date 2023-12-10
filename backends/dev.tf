@@ -1,4 +1,4 @@
-# terraform {
+terraform {
 #   # backend "azurerm" {
 #   #   resource_group_name   = "Assetronai-dev-101-rg-108"
 #   #   storage_account_name  = "sa110"
@@ -14,23 +14,23 @@
 #   #   key                   = local.STATE_DEV_KEYlc
 #   # }
 
-#     backend "azurerm" {
-#     resource_group_name   = "assetronai-dev-100"
-#     storage_account_name  = "sa712"
-#     container_name        = "sacon101"
-#     key                   = "state104.tfstate"
-#   }  
-# }
-
-terraform {
-  //Dev
-  backend "azurerm" {
-    resource_group_name   = var.state_resource_group_name
-    storage_account_name  = var.state_storage_account_name
-    container_name        = var.state_container_name
-    key                   = var.state_key
+    backend "azurerm" {
+    resource_group_name   = "assetronai-dev-100"
+    storage_account_name  = "sa712"
+    container_name        = "sacon101"
+    key                   = "state104.tfstate"
   }  
 }
+
+# terraform {
+#   //Dev
+#   backend "azurerm" {
+#     resource_group_name   = var.state_resource_group_name
+#     storage_account_name  = var.state_storage_account_name
+#     container_name        = var.state_container_name
+#     key                   = var.state_key
+#   }  
+# }
 
 # terraform {
 #   //Dev
