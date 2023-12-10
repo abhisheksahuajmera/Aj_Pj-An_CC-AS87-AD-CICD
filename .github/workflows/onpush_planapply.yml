@@ -86,8 +86,9 @@ jobs:
 
       - name: Run> terraform init
         run: |
-          cd "${{ env.WORKING_DIR}}"
-          terraform init -upgrade -input=false -reconfigure -backend-config=configs/dev_backend.hcl
+          # cd "${{ env.WORKING_DIR}}"
+          # terraform init -upgrade -input=false -reconfigure -backend-config=configs/dev_backend.hcl
+          terraform init -upgrade -backend-config=configs/dev_backend.hcl
 
       # - name: Run> terraform init
       #   run: |
