@@ -27,19 +27,6 @@ env:
 
 jobs:
   tf-plan-dev:
-    environment: dev_plan
-
-    env:
-      AZURE_CLIENT_ID: ${{ secrets.AZURE_DEV_CLIENT_ID }}
-      AZURE_TENANT_ID: ${{ secrets.AZURE_DEV_TENANT_ID }}
-      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_DEV_CLIENT_SECRET }}
-      STATE_RESOURCE_GROUP_NAME: ${{ secrets.STATE_DEV_RESOURCE_GROUP_NAME }}
-      STATE_STORAGE_ACCOUNT_NAME: ${{ secrets.STATE_DEV_STORAGE_ACCOUNT_NAME }}
-      STATE_CONTAINER_NAME: ${{ secrets.STATE_DEV_CONTAINER_NAME }}
-      STATE_KEY: ${{ secrets.STATE_DEV_KEY }}
-      STATE_ACCESS_KEY: ${{ secrets.STATE_DEV_ACCESS_KEY }}
-      JOB_TIMEOUT_MINUTES_LONG: $JOB_TIMEOUT_MINUTES_LONG
-
     name: 'tf-plan-dev: init,validate,plan'
     
     # timeout-minutes: ${{env.JOB_TIMEOUT_MINUTES_LONG }}
@@ -53,6 +40,18 @@ jobs:
         shell: bash
         working-directory: .
 
+    environment: dev_plan
+
+    env:
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_DEV_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_DEV_TENANT_ID }}
+      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_DEV_CLIENT_SECRET }}
+      STATE_RESOURCE_GROUP_NAME: ${{ secrets.STATE_DEV_RESOURCE_GROUP_NAME }}
+      STATE_STORAGE_ACCOUNT_NAME: ${{ secrets.STATE_DEV_STORAGE_ACCOUNT_NAME }}
+      STATE_CONTAINER_NAME: ${{ secrets.STATE_DEV_CONTAINER_NAME }}
+      STATE_KEY: ${{ secrets.STATE_DEV_KEY }}
+      STATE_ACCESS_KEY: ${{ secrets.STATE_DEV_ACCESS_KEY }}
+      JOB_TIMEOUT_MINUTES_LONG: $JOB_TIMEOUT_MINUTES_LONG
 
     steps:
       - run: echo onpush_planapply
